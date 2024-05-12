@@ -1,0 +1,77 @@
+.profile {
+    background-color: var(--secondary-black);
+    color: var(--primary-white);
+    width: 320px;
+    border-radius: 1rem;
+}
+
+.profile_Content {
+    padding: 1rem;
+}
+
+/* PROFILE HEADER */
+
+.profile_Header {
+    display: flex;
+    align-items: center;
+}
+
+.profile_Pic {
+    background-color: var(--primary-gray);
+    height: 3rem;
+    width: 3rem;
+    border-radius: 2rem;
+}
+
+.profile_Info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.profile_Info > p {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+}
+
+
+/* PROFILE BUTTONS */
+
+.profile_Buttons {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.profile_Button {
+    display: flex;
+    background-color: var(--primary-gray);
+    border-radius: 5rem;
+    width: 3rem;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+}
+
+/* PROFILE TRANSACTIONS */
+
+.profile_Transaction {
+    background-color: var(--primary-gray);
+    padding: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+}
+
+.profile_Transaction > p {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+

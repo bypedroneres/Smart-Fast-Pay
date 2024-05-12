@@ -1,0 +1,17 @@
+@media (prefers-color-scheme: dark) {
+    :root {
+      --primary-black: #121212;
+      --secondary-black: #212121;
+      --primary-gray: #3D3D3D;
+      --primary-white: #FEFEFE;
+    }
+  }
+  
+  @media (prefers-color-scheme: light) {
+    :root {
+      --primary-black: #FEFEFE;
+      --secondary-black: #F5F5F5;
+      --primary-gray: #E0E0E0;
+      --primary-white: #121212;
+    }
+  }
