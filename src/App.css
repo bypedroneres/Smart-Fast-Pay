@@ -1,9 +1,9 @@
-.App {
+.home {
     background-color: var(--primary-black);
     height: 100vh;
 }
 
-.App_Dashboard {
+.home_Dashboard {
     padding: 2rem;
     display: flex;
     flex-direction: row;
@@ -11,11 +11,11 @@
 }
 
 @media (max-width: 768px) {
-    .App {
+    .home {
       background-color: var(--primary-black);
     }
   
-    .App_Dashboard {
+    .home_Dashboard {
       padding: 1rem;
       display: flex;
       flex-direction: column;
