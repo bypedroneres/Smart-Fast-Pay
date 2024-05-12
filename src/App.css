@@ -3,6 +3,18 @@
     height: 100vh;
 }
 
+.payment {
+  background-color: var(--primary-black);
+  height: 100vh;
+}
+
+.payment_Dashboard {
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
 .home_Dashboard {
     padding: 2rem;
     display: flex;
