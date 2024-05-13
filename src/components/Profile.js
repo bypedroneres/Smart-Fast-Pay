@@ -1,16 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { auth } from '../firebase'; // Import Firebase auth
+import React, { useState, useEffect, createContext, useContext } from 'react';
+import { auth } from '../firebase'; 
 import '../components/Profile.css';
+
+
+const UserContext = createContext('');
+const BalanceContext = createContext(0);
 
 function Profile() {
   const [userEmail, setUserEmail] = useState('');
+  const [balance, setBalance] = useState(0);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        setUserEmail(user.email); // Set the user's email when the user is logged in
+        setUserEmail(user.email);
+
+        const fetchedBalance = 24000; 
+        setBalance(fetchedBalance);
       } else {
-        setUserEmail(''); // Reset the user's email when no user is logged in
+        setUserEmail('');
+        setBalance(0);
       }
     });
 
@@ -18,17 +27,30 @@ function Profile() {
   }, []);
 
   return (
+    <UserContext.Provider value={userEmail}>
+      <BalanceContext.Provider value={balance}>
+        <ProfileContent />
+      </BalanceContext.Provider>
+    </UserContext.Provider>
+  );
+}
+
+function ProfileContent() {
+  const userEmail = useContext(UserContext);
+  const balance = useContext(BalanceContext);
+
+  return (
     <div className='profile'>
       <div className='profile_Content'>
         <div className='profile_Header'>
           <div className='profile_Pic'></div>
           <div className='profile_Info'>
-            <p>Hello, <br></br>{userEmail}</p>
+            <p>Hello, <br/>{userEmail}</p>
           </div>
         </div>
         <div className='profile_Balance'>
           <p>Total balance</p>
-          <h1>$24.000</h1>
+          <h1>${balance}</h1>
         </div>
             <div className='profile_Buttons'>
                 <div className='profile_Button'>
@@ -74,3 +96,5 @@ function Profile() {
 }
 
 export default Profile
+export { UserContext, BalanceContext }; 
+

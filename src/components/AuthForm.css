@@ -1,6 +1,8 @@
 .auth_Form {
     display: flex;
     flex-direction: column;
+    background-color: var(--primary-black);
+    color: var(--primary-white);
     height: 100vh;
     align-items: center;
     justify-content: center;
@@ -11,9 +13,8 @@
 }
 
 .auth_Form > form {
-    background-color: #FEFEFE;
-    color: #121212;
-    border: 1px solid var(--primary-gray);
+    background-color: var(--secondary-black);
+    color: var(--primary-white);
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -24,6 +25,7 @@
 .auth_Input > input {
     padding: 1rem;
     border-radius: 0.5rem;
+    color: var(--primary-white);
     border: none;
     background-color: var(--primary-gray);
 }

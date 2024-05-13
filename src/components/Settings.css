@@ -1,0 +1,22 @@
+.settings {
+    padding: 1rem;
+    background-color: var(--primary-black);
+}
+
+.settings > button {
+    padding: 1rem;
+    border: 1px solid var(--primary-white);
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+    cursor: pointer;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.menu {
+    height: 100vh;
+    background-color: var(--primary-black);
+}
