@@ -31,5 +31,6 @@ We value your feedback! If you have any suggestions for improving the Smart Fast
 Thank you for choosing Smart Fast Pay. We're excited to have you on board!
 
 Sincerely,  
-The Smart Fast Pay Team
+
+Pedro Neres
 
