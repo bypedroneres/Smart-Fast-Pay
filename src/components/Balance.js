@@ -75,13 +75,13 @@ function Balance() {
         scales: {
           x: {
             title: {
-              display: true,
+              display: false,
               text: 'Date'
             }
           },
           y: {
             title: {
-              display: true,
+              display: false,
               text: 'Total Sum'
             }
           }

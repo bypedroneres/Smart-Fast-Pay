@@ -56,8 +56,3 @@
     cursor: pointer;
     border-radius: 0.5rem;
 }
-
-.transaction_Content > form > button:hover {
-    background-color: var(--primary-black);
-    color: var(--primary-white);
-}

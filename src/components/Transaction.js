@@ -3,27 +3,27 @@ import db, { auth } from '../firebase';
 import '../components/Transaction.css';
 
 function Transaction() {
-  const [descricao, setDescricao] = useState('');
-  const [valor, setValor] = useState('');
-  const [moeda, setMoeda] = useState('');
-  const [data, setData] = useState('');
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
+  const [currency, setCurrency] = useState('');
+  const [date, setDate] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!valor || isNaN(parseFloat(valor)) || parseFloat(valor) <= 0) {
-      setErrorMessage('Por favor, insira um valor válido.');
+    if (!amount || isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
+      setErrorMessage('Please enter a valid amount.');
       return;
     }
 
-    if (!moeda) {
-      setErrorMessage('Por favor, selecione uma moeda.');
+    if (!currency) {
+      setErrorMessage('Please select a currency.');
       return;
     }
 
-    if (!data) {
-      setErrorMessage('Por favor, selecione uma data.');
+    if (!date) {
+      setErrorMessage('Please select a date.');
       return;
     }
 
@@ -34,18 +34,22 @@ function Transaction() {
       if (currentUser) {
         const userId = currentUser.uid;
         const transactionData = {
-          descricao,
-          amount: parseFloat(valor),
-          moeda,
-          date: new Date(data),
+          description,
+          amount: parseFloat(amount),
+          currency,
+          date: new Date(date),
           userId
         };
+        // Deduct the transaction amount from user's balance
         await db.collection('transactions').add(transactionData);
+        await db.collection('users').doc(userId).update({
+          balance: db.FieldValue.increment(-parseFloat(amount)) // Deduct the amount from the user's balance
+        });
         console.log('Transaction successfully added to Firestore:', transactionData);
-        setDescricao('');
-        setValor('');
-        setMoeda('');
-        setData('');
+        setDescription('');
+        setAmount('');
+        setCurrency('');
+        setDate('');
       } else {
         console.error('Current user not found');
       }
@@ -60,20 +64,20 @@ function Transaction() {
         <p>Sending</p>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <input placeholder='Ammount' type="number" id="valor" value={valor} onChange={(e) => setValor(e.target.value)} />
+            <input placeholder='Amount' type="number" id="amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
           </div>
           <div className="form-group">
-            <input placeholder='Description' type="text" id="descricao" value={descricao} onChange={(e) => setDescricao(e.target.value)} />
+            <input placeholder='Description' type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
           </div>
           <div className="form-group">
-            <select id="moeda" value={moeda} onChange={(e) => setMoeda(e.target.value)}>
-              <option value="">Selecione uma moeda</option>
+            <select id="currency" value={currency} onChange={(e) => setCurrency(e.target.value)}>
+              <option value="">Select a currency</option>
               <option value="BRL">BRL</option>
               <option value="USD">USD</option>
             </select>
           </div>
           <div className="form-group">
-            <input placeholder='Date' type="date" id="data" value={data} onChange={(e) => setData(e.target.value)} />
+            <input placeholder='Date' type="date" id="date" value={date} onChange={(e) => setDate(e.target.value)} />
           </div>
           {errorMessage && <div className="error-message">{errorMessage}</div>}
           <button type="submit">
