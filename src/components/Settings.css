@@ -1,12 +1,12 @@
 .settings {
-    padding: 1rem;
+    padding: 2rem;
     background-color: var(--primary-black);
 }
 
 .settings > button {
     padding: 1rem;
-    border: 1px solid var(--primary-white);
-    background-color: var(--primary-black);
+    background-color: var(--primary-gray);
+    border: none;
     color: var(--primary-white);
     cursor: pointer;
     border-radius: 0.5rem;
