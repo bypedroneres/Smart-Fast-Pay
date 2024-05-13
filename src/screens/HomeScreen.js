@@ -9,8 +9,8 @@ function HomeScreen() {
         <div className='home_Dashboard'>
         <Profile/>
         <Balance/>
-        <Navbar/>
         </div>
+        <Navbar/>
       
     </div>
   )

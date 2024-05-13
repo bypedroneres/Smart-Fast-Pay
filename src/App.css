@@ -1,6 +1,5 @@
 .home {
     background-color: var(--primary-black);
-    height: 100vh;
 }
 
 .payment {
@@ -25,6 +24,7 @@
 @media (max-width: 768px) {
     .home {
       background-color: var(--primary-black);
+      margin-bottom: 10rem;
     }
   
     .home_Dashboard {
