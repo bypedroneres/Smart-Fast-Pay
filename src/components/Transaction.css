@@ -7,6 +7,9 @@
 
 .transaction_Content {
     padding: 1rem;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
 }
 
 .transaction_Content > form {
@@ -19,11 +22,13 @@
     width: 100%;
     gap: 1rem;
     display: flex;
-    background-color: blue;
 }
 
 .form-group > input {
     width: 100%;
+    background-color: var(--primary-gray);
+    border-radius: 0.5rem;
+    border: none;
     padding: 1rem;
 }
 
@@ -31,14 +36,20 @@
     appearance: none;
     padding: 1rem;
     border: none;
+    background-color: var(--primary-gray);
+    color: var(--primary-white);
     width: 100%;
-    border-radius: 0rem;
+    border-radius: 0.5rem;
 }
 
 
 .transaction_Content > form > button {
     background-color: var(--primary-white);
     color: var(--secondary-black);
+    display: flex;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
     border: none;
     padding: 1rem;
     width: 100%;
@@ -47,6 +58,6 @@
 }
 
 .transaction_Content > form > button:hover {
-    background-color: var(--primary-gray);
-    color: var(--primary-black);
+    background-color: var(--primary-black);
+    color: var(--primary-white);
 }

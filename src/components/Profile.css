@@ -35,7 +35,12 @@
     font-size: 0.8rem;
 }
 
+/* PROFILE BALANCE */
 
+.profile_Balance > h1 {
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
 /* PROFILE BUTTONS */
 
 .profile_Buttons {

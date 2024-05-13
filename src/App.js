@@ -4,6 +4,7 @@ import './theme/variables.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import PaymentScreen from './screens/PaymentScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/payment" element={<PaymentScreen />} />
+            <Route path="/register" element={<RegisterScreen />} />
           </Routes>
         </Router>
       </div>
