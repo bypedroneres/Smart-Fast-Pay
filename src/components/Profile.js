@@ -1,23 +1,30 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
-import { auth } from '../firebase'; 
-import { Link } from 'react-router-dom'; 
+import React, { useState, useEffect } from 'react';
+import db, { auth } from '../firebase';
+import { Link } from 'react-router-dom';
 import '../components/Profile.css';
-
-
-const UserContext = createContext('');
-const BalanceContext = createContext(0);
 
 function Profile() {
   const [userEmail, setUserEmail] = useState('');
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         setUserEmail(user.email);
 
-        const fetchedBalance = 24000; 
-        setBalance(fetchedBalance);
+        // Fetch user balance
+        const userId = user.uid;
+        const userDocRef = db.collection('users').doc(userId);
+        const userDoc = await userDocRef.get();
+        
+        if (userDoc.exists) {
+          setBalance(userDoc.data().balance || 1000);
+        } else {
+          console.error('User document not found, creating a new one...');
+          // Create a new user document with default data
+          await userDocRef.set({ balance: 1000 }); // Assuming balance starts from 0
+          setBalance(0);
+        }
       } else {
         setUserEmail('');
         setBalance(0);
@@ -26,19 +33,6 @@ function Profile() {
 
     return () => unsubscribe();
   }, []);
-
-  return (
-    <UserContext.Provider value={userEmail}>
-      <BalanceContext.Provider value={balance}>
-        <ProfileContent />
-      </BalanceContext.Provider>
-    </UserContext.Provider>
-  );
-}
-
-function ProfileContent() {
-  const userEmail = useContext(UserContext);
-  const balance = useContext(BalanceContext);
 
   return (
     <div className='profile'>
@@ -97,5 +91,4 @@ function ProfileContent() {
 }
 
 export default Profile
-export { UserContext, BalanceContext }; 
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import db, { auth } from '../firebase';
 import '../components/Transaction.css';
 
 function Transaction() {
@@ -8,7 +9,7 @@ function Transaction() {
   const [data, setData] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!valor || isNaN(parseFloat(valor)) || parseFloat(valor) <= 0) {
@@ -26,20 +27,31 @@ function Transaction() {
       return;
     }
 
-
     setErrorMessage('');
 
-    console.log('Transaction data:', {
-      descricao,
-      valor,
-      moeda,
-      data
-    });
-
-    setDescricao('');
-    setValor('');
-    setMoeda('');
-    setData('');
+    try {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        const userId = currentUser.uid;
+        const transactionData = {
+          descricao,
+          amount: parseFloat(valor),
+          moeda,
+          date: new Date(data),
+          userId
+        };
+        await db.collection('transactions').add(transactionData);
+        console.log('Transaction successfully added to Firestore:', transactionData);
+        setDescricao('');
+        setValor('');
+        setMoeda('');
+        setData('');
+      } else {
+        console.error('Current user not found');
+      }
+    } catch (error) {
+      console.error('Error adding transaction to Firestore:', error);
+    }
   };
 
   return (
@@ -60,13 +72,16 @@ function Transaction() {
               <option value="USD">USD</option>
             </select>
           </div>
+          <div className="form-group">
+            <input placeholder='Date' type="date" id="data" value={data} onChange={(e) => setData(e.target.value)} />
+          </div>
           {errorMessage && <div className="error-message">{errorMessage}</div>}
           <button type="submit">
-          <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 6V18M12 6L7 11M12 6L17 11" stroke="var(--primary-black)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+            <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 6V18M12 6L7 11M12 6L17 11" stroke="var(--primary-black)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
             <p>Send</p>
-            </button>
+          </button>
         </form>
       </div>
     </div>
