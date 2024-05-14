@@ -30,6 +30,7 @@
     border-radius: 0.5rem;
     border: none;
     padding: 1rem;
+    color: var(--primary-white);
 }
 
 .form-group > select {
